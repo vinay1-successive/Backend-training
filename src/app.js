@@ -1,9 +1,15 @@
 import express from "express";
 import cookieParser from "cookie-parser";
-import arr from "./mockData.js";
+import arr from "./utils/mockData.js";
+import { dataRouter } from "./routes/index.js";
+import { loginRouter } from "./routes/index.js";
 const app = express();
-
+const port = process.env.PORT || 3000;
+app.use(express.json());
 app.use(cookieParser());
+
+app.use("/login", loginRouter);
+app.use("/data", dataRouter);
 
 app.get("/", (req, res) => {
   res.send(arr);
@@ -21,6 +27,6 @@ app.get("/checkValue", (req, res) => {
     res.send("error");
   }
 });
-app.listen(3000, () => {
-  console.log("Server Started");
+app.listen(port, () => {
+  console.log(`Started at ${port}`);
 });

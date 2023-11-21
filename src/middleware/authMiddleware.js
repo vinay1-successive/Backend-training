@@ -9,7 +9,8 @@ const authToken = (req, res, next) => {
     req.user = user;
     next();
   } catch (error) {
-    return res.sendStatus(401);
+    console.log(error);
+    return res.status(401).send(error.message);
   }
 };
 

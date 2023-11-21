@@ -1,8 +1,10 @@
 import express from "express";
 import cookieParser from "cookie-parser";
 import arr from "./utils/mockData.js";
+import createError from "http-errors";
 import { dataRouter } from "./routes/index.js";
 import { loginRouter } from "./routes/index.js";
+import errorHandler from "./middleware/errorMiddleware.js";
 const app = express();
 const port = process.env.PORT || 3000;
 app.use(express.json());
@@ -12,11 +14,19 @@ app.use("/login", loginRouter);
 app.use("/data", dataRouter);
 
 app.get("/", (req, res) => {
-  res.send(arr);
+  try {
+    res.send(arr);
+  } catch (error) {
+    res.status(401).send("Unauthorized");
+  }
 });
 
 app.get("/setValue", (req, res) => {
-  res.cookie("name", "Vinay").send("Done");
+  try {
+    res.cookie("name", "Vinay").send("Done");
+  } catch (error) {
+    res.send(error);
+  }
 });
 
 app.get("/checkValue", (req, res) => {
@@ -24,9 +34,16 @@ app.get("/checkValue", (req, res) => {
   if (value) {
     res.send(value);
   } else {
-    res.send("error");
+    res.status(403).send("Value not set");
   }
 });
+
+app.use((req, res, next) => {
+  next(createError(404,"Not Found"));
+});
+
+app.use(errorHandler);
+
 app.listen(port, () => {
   console.log(`Started at ${port}`);
 });

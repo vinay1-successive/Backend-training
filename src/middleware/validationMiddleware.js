@@ -4,7 +4,7 @@ const validate = (req, res, next) => {
   const user = req.body;
   const { error, value } = userSchema.validate(user);
   if (error) {
-    return res.sendStatus(401);
+    return res.status(422).send("Unprocessable Entity");
   }
   next();
 };

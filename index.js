@@ -21,4 +21,4 @@ const AddData = (val1, val2) => {
   });
 };
 
-AddData(argv[2], argv[3]);
+AddData(Number(argv[2]), Number(argv[3]));

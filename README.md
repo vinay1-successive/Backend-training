@@ -12,7 +12,7 @@
 2. <h3>Install Curl:</h3>
    Utilize the command
 
-   - sudo apt install curl
+   - sudo apt install curl  
 
    to install the Curl tool, which is instrumental for transferring data between your system and servers.
 

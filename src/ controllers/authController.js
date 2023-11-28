@@ -4,7 +4,7 @@ const secret = "Vinay@1234";
 const setUser = (req, res) => {
   
   const user=req.body;
-  const token = jwt.sign(user, secret, { expiresIn: "30s" });
+  const token = jwt.sign(user, secret, { expiresIn: "300s" });
   res.json({ token });
 };
 

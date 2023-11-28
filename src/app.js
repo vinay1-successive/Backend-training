@@ -1,14 +1,14 @@
 import express from "express";
 import cookieParser from "cookie-parser";
 import arr from "./utils/mockData.js";
-import { dataRouter } from "./routes/index.js";
-import { loginRouter } from "./routes/index.js";
-import logMiddleware from "./middleware/logMiddleware.js";
-import errorHandler from "./middleware/errorMiddleware.js";
+import { dataRouter, loginRouter, dynamicLoginRouter } from "./routes/index.js";
+import {
+  logMiddleware,
+  errorHandler,
+  headerMiddleware,
+  limitMiddleWare,
+} from "./middleware/index.js";
 import createError from "http-errors";
-import headerMiddleware from "./middleware/headerMiddleware.js";
-import limitMiddleWare from "./middleware/limitMiddleWare.js";
-import dynamicLoginRouter from "./routes/dynamicLoginRoutes.js";
 const app = express();
 const port = process.env.PORT || 3000;
 

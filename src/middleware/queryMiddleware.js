@@ -1,12 +1,13 @@
 const queryMiddleware = (req, res, next) => {
+  try {
     const value = req.query;
-    if(!Number(value.name))
-    {
-      
-      return res.status(422).send("Invalid Query");
+    if (!Number(value.name)) {
+      throw "Invalid Query!";
     }
     next();
-  };
-  
-  export default queryMiddleware;
-  
+  } catch (error) {
+    return res.status(422).send(error);
+  }
+};
+
+export default queryMiddleware;

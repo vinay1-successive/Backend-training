@@ -1,14 +1,18 @@
 import schema from "../utils/Schemas.js";
 const dynamicValidation = (req, res, next) => {
-  const url = req.url.split("/")[1];
-  const user = req.body;
-  const validateFun = schema[url];
-  const { error, value } = validateFun.validate(user);
-  if (error) {
-    return res.status(401).send("Unauthorized");
+  try {
+    const url = req.url.split("/")[1];
+    const user = req.body;
+    const validateFun = schema[url];
+    const { error, value } = validateFun.validate(user, { abortEarly: false });
+    if (error) {
+      throw error;
+    }
+    req.user = value;
+    next();
+  } catch (error) {
+    return res.status(422).send(error.details);
   }
-  req.user = value;
-  next();
 };
 
 export default dynamicValidation;

@@ -1,8 +1,9 @@
+import { Request, Response, NextFunction } from "express";
 const limit = 4;
 let count = 0;
 const window = 10;
 
-const limitMiddleWare = (req, res, next) => {
+const limitMiddleWare = (req:Request, res:Response, next:NextFunction) => {
   try {
     if (count >= limit) {
       throw new Error();

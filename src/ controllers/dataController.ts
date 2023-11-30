@@ -1,5 +1,6 @@
 import arr from "../utils/mockData.js";
-const getData = (req, res) => {
+import { Request, Response } from "express";
+const getData = (req: Request, res: Response) => {
   try {
     res.json(arr);
   } catch (error) {
@@ -7,18 +8,17 @@ const getData = (req, res) => {
   }
 };
 
-const getDataByParameter = (req, res) => {
+const getDataByParameter = (req: Request, res: Response) => {
   try {
-    if (isNaN(req.params.id)) {
-      return res.status(401).json({ error: "Invalid Id" });
-    }
+    const id = parseInt(req.params.id);
+    if (isNaN(id)) return res.status(401).json({ error: "Invalid Id" });
     res.json(req.params);
   } catch (error) {
     return res.status(401).json({ error: "Data not received" });
   }
 };
 
-const putData = (req, res) => {
+const putData = (req: Request, res: Response) => {
   try {
     const newD = req.body;
     arr.push(newD);

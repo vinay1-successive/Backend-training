@@ -1,7 +1,8 @@
 import jwt from "jsonwebtoken";
 const secret = "Vinay@1234";
 
-const setUser = (req, res) => {
+import { Request, Response } from "express";
+const setUser = (req: Request, res: Response) => {
   try {
     const user = req.body;
     console.log(user);

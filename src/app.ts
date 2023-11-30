@@ -1,6 +1,7 @@
 import express from "express";
 import cookieParser from "cookie-parser";
 import arr from "./utils/mockData.js";
+import { Request,Response,NextFunction } from "express";
 import { dataRouter, loginRouter, dynamicLoginRouter,asyncDataRouter } from "./routes/index.js";
 import {
   errorHandler,
@@ -23,7 +24,7 @@ app.use("/login", loginRouter);
 app.use("/data", dataRouter);
 app.use("/asyncData",asyncDataRouter);
 
-app.get("/", (req, res) => {
+app.get("/", (req: Request, res: Response) => {
   try {
     res.send(arr);
   } catch (error) {
@@ -31,7 +32,7 @@ app.get("/", (req, res) => {
   }
 });
 
-app.get("/setValue", (req, res) => {
+app.get("/setValue", (req: Request, res: Response) => {
   try {
     res.cookie("name", "Vinay").send("Done");
   } catch (error) {
@@ -39,7 +40,7 @@ app.get("/setValue", (req, res) => {
   }
 });
 
-app.get("/checkValue", (req, res) => {
+app.get("/checkValue", (req: Request, res: Response) => {
   try {
     const value = req.cookies.name;
     if (!value) {
@@ -51,7 +52,7 @@ app.get("/checkValue", (req, res) => {
   }
 });
 
-app.use((req, res, next) => {
+app.use((req:Request, res:Response, next:NextFunction) => {
   next(createError(404, "Not Found"));
 });
 app.use(errorHandler);

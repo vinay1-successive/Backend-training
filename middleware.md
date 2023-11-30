@@ -20,7 +20,7 @@ If a middleware function doesn't end the request-response cycle, it must call `n
    const express = require('express');
    const app = express();
 
-   app.use((req, res, next) => {
+   app.use((req,res,next) => {
      // Custom middleware logic
      console.log('Time:', Date.now());
      next();
@@ -36,7 +36,7 @@ If a middleware function doesn't end the request-response cycle, it must call `n
    const app = express();
    const router = express.Router();
 
-   router.use('/user/:id', (req, res, next) => {
+   router.use('/user/:id', (req,res,next) => {
      // Middleware for a specific route
      console.log('Request Type:', req.method);
      next();
@@ -44,11 +44,11 @@ If a middleware function doesn't end the request-response cycle, it must call `n
    ```
 
 3. **Error-handling Middleware:**
-   Error-handling middleware functions take four arguments `(err, req, res, next)` and are used to handle errors during the request-response cycle.
+   Error-handling middleware functions take four arguments `(err, req,res,next)` and are used to handle errors during the request-response cycle.
 
    Example:
    ```javascript
-   app.use((err, req, res, next) => {
+   app.use((err, req,res,next) => {
      console.error(err.stack);
      res.status(500).send('Something broke!');
    });

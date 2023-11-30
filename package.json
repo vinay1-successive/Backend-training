@@ -19,6 +19,7 @@
     "ip-to-location": "^1.0.1",
     "joi": "^17.11.0",
     "jsonwebtoken": "^9.0.2",
-    "lodash": "^4.17.21"
+    "lodash": "^4.17.21",
+    "morgan": "^1.10.0"
   }
 }

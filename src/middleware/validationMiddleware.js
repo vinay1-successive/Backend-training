@@ -1,12 +1,16 @@
 import userSchema from "../utils/userSchema.js";
 
 const validate = (req, res, next) => {
-  const user = req.body;
-  const { error, value } = userSchema.validate(user);
-  if (error) {
-    return res.sendStatus(401);
+  try {
+    const user = req.body;
+    const { error, value } = userSchema.validate(user, { abortEarly: false });
+    if (error) {
+      throw error;
+    }
+    next();
+  } catch (error) {
+    return res.status(422).json(error.details);
   }
-  next();
 };
 
 export default validate;

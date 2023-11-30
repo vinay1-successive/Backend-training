@@ -3,20 +3,20 @@ import cookieParser from "cookie-parser";
 import arr from "./utils/mockData.js";
 import { dataRouter, loginRouter, dynamicLoginRouter } from "./routes/index.js";
 import {
-  logMiddleware,
   errorHandler,
   headerMiddleware,
   limitMiddleWare,
 } from "./middleware/index.js";
 import createError from "http-errors";
+import morgan from "morgan";
 const app = express();
-const port = process.env.PORT || 3000;
+const port = process.env.PORT || 3021;
 
 app.use(express.json());
+app.use(morgan(":method :url :date[clf]"));
 app.use(headerMiddleware({ CustomKey1: "CustomValue1" }));
 app.use(limitMiddleWare);
 app.use(cookieParser());
-app.use(logMiddleware);
 
 app.use("/user", dynamicLoginRouter);
 app.use("/login", loginRouter);
@@ -31,18 +31,20 @@ app.get("/setValue", (req, res) => {
 });
 
 app.get("/checkValue", (req, res) => {
-  const value = req.cookies.name;
-  if (value) {
+  try {
+    const value = req.cookies.name;
+    if (!value) {
+      throw new Error();
+    }
     res.send(value);
-  } else {
-    res.send("error");
+  } catch (error) {
+    return res.status(401).send("Cookie not set");
   }
 });
 
 app.use((req, res, next) => {
   next(createError(404, "Not Found"));
 });
-
 app.use(errorHandler);
 
 app.listen(port, () => {

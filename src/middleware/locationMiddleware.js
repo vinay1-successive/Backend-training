@@ -1,9 +1,13 @@
 const locationMiddleware = (req, res, next) => {
-  if (req.ip !== "::1") {
+  try {
+    if (req.ip !== "::1") {
+      throw new Error();
+    }
+    console.log("Correct IP!!");
+    next();
+  } catch (error) {
     res.status(403).send("Forrbidden");
   }
-  console.log("Done!!");
-  next();
 };
 
 export default locationMiddleware;

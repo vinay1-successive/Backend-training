@@ -4,7 +4,6 @@ import errorHandler from "./errorMiddleware.js";
 import headerMiddleware from "./headerMiddleware.js";
 import limitMiddleWare from "./limitMiddleWare.js";
 import locationMiddleware from "./locationMiddleware.js";
-import logMiddleware from "./logMiddleware.js";
 import queryMiddleware from "./queryMiddleware.js";
 import validate from "./validationMiddleware.js";
 
@@ -16,6 +15,5 @@ export {
   headerMiddleware,
   limitMiddleWare,
   locationMiddleware,
-  logMiddleware,
   validate,
 };

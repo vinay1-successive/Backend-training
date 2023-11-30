@@ -2,10 +2,17 @@ import jwt from "jsonwebtoken";
 const secret = "Vinay@1234";
 
 const setUser = (req, res) => {
-  const user = { id: 1, name: "Vinay" };
-
-  const token = jwt.sign(user, secret, { expiresIn: "1h" });
-  res.json({ token });
+  try {
+    const user = req.body;
+    console.log(user);
+    if (!Object.keys(user).length) {
+      throw new Error();
+    }
+    const token = jwt.sign(user, secret, { expiresIn: "1h" });
+    res.json({ token });
+  } catch (error) {
+    return res.status(422).send("Unprocessable entry");
+  }
 };
 
 export { setUser };

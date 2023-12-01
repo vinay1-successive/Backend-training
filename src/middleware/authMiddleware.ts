@@ -1,7 +1,7 @@
 import jwt from "jsonwebtoken";
 const secret = "Vinay@1234";
 import { Request, Response, NextFunction } from "express";
-const authToken = (req:Request, res:Response, next:NextFunction) => {
+const authToken = (req: Request, res: Response, next: NextFunction) => {
   try {
     const bearer = req.headers["authorization"]?.split(" ")[0];
     if (bearer !== "bearer") {

@@ -1,58 +1,23 @@
 import express from "express";
 import cookieParser from "cookie-parser";
-import arr from "./utils/mockData.js";
-import { Request,Response,NextFunction } from "express";
-import { dataRouter, loginRouter, dynamicLoginRouter,asyncDataRouter } from "./routes/index.js";
-import {
-  errorHandler,
-  headerMiddleware,
-  limitMiddleWare,
-} from "./middleware/index.js";
+import { Request, Response, NextFunction } from "express";
+import { errorHandler, headerMiddleware } from "./middleware/index.js";
 import createError from "http-errors";
 import morgan from "morgan";
+import dotenv from "dotenv";
+import router from "./routes.js";
 const app = express();
-const port = process.env.PORT || 3021;
+dotenv.config();
+const port = process.env.PORT;
 
 app.use(express.json());
 app.use(morgan(":method :url :date[clf]"));
 app.use(headerMiddleware({ CustomKey1: "CustomValue1" }));
-app.use(limitMiddleWare);
 app.use(cookieParser());
 
-app.use("/user", dynamicLoginRouter);
-app.use("/login", loginRouter);
-app.use("/data", dataRouter);
-app.use("/asyncData",asyncDataRouter);
+app.use(router);
 
-app.get("/", (req: Request, res: Response) => {
-  try {
-    res.send(arr);
-  } catch (error) {
-    res.status(401).send("Unauthorized");
-  }
-});
-
-app.get("/setValue", (req: Request, res: Response) => {
-  try {
-    res.cookie("name", "Vinay").send("Done");
-  } catch (error) {
-    res.send(error);
-  }
-});
-
-app.get("/checkValue", (req: Request, res: Response) => {
-  try {
-    const value = req.cookies.name;
-    if (!value) {
-      throw new Error();
-    }
-    res.send(value);
-  } catch (error) {
-    return res.status(401).send("Cookie not set");
-  }
-});
-
-app.use((req:Request, res:Response, next:NextFunction) => {
+app.use((req: Request, res: Response, next: NextFunction) => {
   next(createError(404, "Not Found"));
 });
 app.use(errorHandler);

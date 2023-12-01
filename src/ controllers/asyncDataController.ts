@@ -10,7 +10,8 @@ const asyncDataFun = async (req: Request, res: Response) => {
     const newD = req.body;
     arr.push(newD);
     await wait(3000);
-    throw new Error()
+    // throw new Error()
+    res.json({arr})
   } catch (error) {
     return res.status(402).send("Something went wrong");
   }

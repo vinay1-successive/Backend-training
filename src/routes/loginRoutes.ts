@@ -5,6 +5,6 @@ import { locationMiddleware } from "../middleware/index.js";
 
 const loginRouter = express.Router();
 
-loginRouter.post("/", locationMiddleware, validate, setUser);
+loginRouter.post("/userLogin", locationMiddleware, validate, setUser);
 
 export default loginRouter;

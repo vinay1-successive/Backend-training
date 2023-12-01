@@ -3,6 +3,6 @@ import asyncDataFun from "../ controllers/asyncDataController.js";
 
 const asyncDataRouter = express.Router();
 
-asyncDataRouter.post("/", asyncDataFun);
+asyncDataRouter.post("/add", asyncDataFun);
 
 export default asyncDataRouter;

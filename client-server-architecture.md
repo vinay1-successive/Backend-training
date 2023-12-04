@@ -11,7 +11,7 @@ Express.js is a minimal and flexible Node.js web application framework that prov
    const express = require("express");
    const app = express();
 
-   app.get("/", (req: Request, res: Response) => {
+   app.get("/", (req, res) => {
      res.send("Hello, Express!");
    });
 
@@ -31,7 +31,7 @@ Express.js is a minimal and flexible Node.js web application framework that prov
 
    ```javascript
    app.set("view engine", "ejs");
-   app.get("/example", (req: Request, res: Response) => {
+   app.get("/example", (req, res) => {
      res.render("example", { data: "Express.js" });
    });
    ```
@@ -39,7 +39,7 @@ Express.js is a minimal and flexible Node.js web application framework that prov
 4. **RESTful API Development:** Express simplifies the creation of RESTful APIs by providing methods like `app.get()`, `app.post()`, etc.
 
    ```javascript
-   app.post("/api/users", (req: Request, res: Response) => {
+   app.post("/api/users", (req, res) => {
      // Logic to create a new user
      res.json({ message: "User created successfully" });
    });

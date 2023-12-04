@@ -1,4 +1,4 @@
-import { authToken } from "./authMiddleware.js";
+import  authToken  from "./authMiddleware.js";
 import dynamicValidation from "./dynamicValidation.js";
 import errorHandler from "./errorMiddleware.js";
 import headerMiddleware from "./headerMiddleware.js";

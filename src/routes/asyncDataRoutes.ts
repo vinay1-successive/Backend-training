@@ -1,8 +1,25 @@
-import express from "express";
+// import express from "express";
+// import asyncDataFun from "../ controllers/asyncDataController.js";
+
+// const asyncDataRouter = express.Router();
+
+// asyncDataRouter.post("/add", asyncDataFun);
+
+// export default asyncDataRouter;
+
+import express, { Router } from "express";
 import asyncDataFun from "../ controllers/asyncDataController.js";
+class AsyncRouter {
+  public asyncDataRouter: Router;
+  constructor() {
+    this.asyncDataRouter = express.Router();
+    this.setupRoutes();
+  }
 
-const asyncDataRouter = express.Router();
+  private setupRoutes(): void {
+    this.asyncDataRouter.post("/add", asyncDataFun);
+  }
+}
 
-asyncDataRouter.post("/add", asyncDataFun);
-
-export default asyncDataRouter;
+const asyncDataRouterInstance = new AsyncRouter();
+export default asyncDataRouterInstance.asyncDataRouter;

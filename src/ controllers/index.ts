@@ -1,16 +1,14 @@
 import asyncDataFun from "./asyncDataController.js";
-import { setUser } from "./authController.js";
-import { getData, putData, getDataByParameter } from "./dataController.js";
-import { login, register } from "./dynamicController.js";
-import { setData, checkData } from "./cookieController.js";
+import setUser from "./authController.js";
+import dataControllerInstance from "./dataController.js";
+import dynamicControllerInstance from "./dynamicController.js";
+import cookieControllerInstance from "./cookieController.js";
+import check from "./heathCheckContoller.js";
 export {
   setUser,
-  getData,
-  putData,
-  getDataByParameter,
-  login,
-  register,
+  dataControllerInstance,
+  dynamicControllerInstance,
   asyncDataFun,
-  setData,
-  checkData,
+  cookieControllerInstance,
+  check
 };

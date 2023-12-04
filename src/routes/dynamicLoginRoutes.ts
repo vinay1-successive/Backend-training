@@ -1,14 +1,3 @@
-// import express, { Router } from "express";
-// import { dynamicValidation } from "../middleware/index.js";
-// import { login, register } from "../ controllers/index.js";
-
-// const dynamicLoginRouter = express.Router();
-
-// dynamicLoginRouter.post("/register", dynamicValidation, register);
-// dynamicLoginRouter.post("/login", dynamicValidation, login);
-
-// export default dynamicLoginRouter;
-
 import express, { Router } from "express";
 import { dynamicValidation } from "../middleware/index.js";
 import { dynamicControllerInstance } from "../ controllers/index.js";

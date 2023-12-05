@@ -48,7 +48,7 @@ Express.js is a minimal and flexible Node.js web application framework that prov
 5. **Error Handling:** Express provides mechanisms for handling errors through middleware, making it easier to manage errors in applications.
 
    ```javascript
-   app.use((err, req, res, next) => {
+   app.use((err, req,res,next) => {
      console.error(err.stack);
      res.status(500).send("Something went wrong!");
    });

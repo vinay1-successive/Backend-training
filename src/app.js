@@ -9,8 +9,8 @@ import {
 } from "./middleware/index.js";
 import createError from "http-errors";
 import morgan from "morgan";
+import configuration from "./config/config.js";
 const app = express();
-const port = process.env.PORT || 3021;
 
 app.use(express.json());
 app.use(morgan(":method :url :date[clf]"));
@@ -47,6 +47,6 @@ app.use((req, res, next) => {
 });
 app.use(errorHandler);
 
-app.listen(port, () => {
-  console.log(`Started at ${port}`);
+app.listen(configuration.port, () => {
+  console.log(`Started at ${configuration.port}`);
 });

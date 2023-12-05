@@ -10,5 +10,5 @@ export {
   dynamicControllerInstance,
   asyncDataFun,
   cookieControllerInstance,
-  check
+  check,
 };

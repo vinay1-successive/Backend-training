@@ -1,9 +1,9 @@
 import arr from "../utils/mockData.js";
-import { Request, Response } from "express";
+import { type Request, type Response } from "express";
 class AsyncDataController {
   private async wait(ms: number): Promise<void> {
-    return new Promise((res) => {
-      setTimeout(res, ms);
+    await new Promise((resolve) => {
+      setTimeout(resolve, ms);
     });
   }
 
@@ -22,5 +22,5 @@ class AsyncDataController {
 
 const asyncDataControllerInstance = new AsyncDataController();
 export default asyncDataControllerInstance.asyncDataFun.bind(
-  asyncDataControllerInstance
+  asyncDataControllerInstance,
 );

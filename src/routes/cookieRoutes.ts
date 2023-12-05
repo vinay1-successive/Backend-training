@@ -1,4 +1,4 @@
-import express, { Router } from "express";
+import express, { type Router } from "express";
 import { cookieControllerInstance } from "../ controllers/index.js";
 class CookieRouter {
   public cookieRouter: Router;

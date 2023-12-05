@@ -1,13 +1,22 @@
-import { NextFunction, Request, Response } from "express";
+import { type NextFunction, type Request, type Response } from "express";
 import userSchema from "../utils/userSchema";
+class ValidationError extends Error {
+  details: any;
 
+  constructor(message: string, details: any) {
+    super(message);
+    this.details = details;
+  }
+}
 class ValidationMiddleware {
   public validate(req: Request, res: Response, next: NextFunction): void {
     try {
       const user = req.body;
-      const { error, value } = userSchema.validate(user, { abortEarly: false });
+      const { error } = userSchema.validate(user, { abortEarly: false });
       if (error) {
-        throw error.details;
+        const customError = new ValidationError("Failed", error.details);
+        res.status(422).json({ error: customError });
+        return;
       }
       next();
     } catch (error) {
@@ -18,5 +27,5 @@ class ValidationMiddleware {
 
 const validationMiddlewareInstance = new ValidationMiddleware();
 export default validationMiddlewareInstance.validate.bind(
-  validationMiddlewareInstance
+  validationMiddlewareInstance,
 );

@@ -1,8 +1,8 @@
 import jwt from "jsonwebtoken";
-import { Request, Response, NextFunction } from "express";
+import { type Request, type Response, type NextFunction } from "express";
 
 class AuthTokenMiddleware {
-  private secret: string;
+  private readonly secret: string;
 
   constructor(secret: string) {
     this.secret = secret;
@@ -10,11 +10,11 @@ class AuthTokenMiddleware {
 
   public authToken(req: Request, res: Response, next: NextFunction): void {
     try {
-      const bearer = req.headers["authorization"]?.split(" ")[0];
+      const bearer = req.headers.authorization?.split(" ")[0];
       if (bearer !== "bearer") {
         throw new Error();
       }
-      const token = req.headers["authorization"]?.split(" ")[1];
+      const token = req.headers.authorization?.split(" ")[1];
       const user = jwt.verify(token ?? "", "Vinay@1234");
       req.body.user = user;
       next();
@@ -27,5 +27,5 @@ class AuthTokenMiddleware {
 const secret = "Vinay@1234";
 const authTokenMiddlewareInstance = new AuthTokenMiddleware(secret);
 export default authTokenMiddlewareInstance.authToken.bind(
-  authTokenMiddlewareInstance
+  authTokenMiddlewareInstance,
 );

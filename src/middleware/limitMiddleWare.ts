@@ -1,9 +1,9 @@
-import { Request, Response, NextFunction } from "express";
+import { type Request, type Response, type NextFunction } from "express";
 
 class LimitMiddleware {
-  private limit: number;
+  private readonly limit: number;
   private count: number;
-  private window: number;
+  private readonly window: number;
 
   constructor(limit: number, window: number) {
     this.limit = limit;
@@ -11,7 +11,11 @@ class LimitMiddleware {
     this.window = window;
   }
 
-  public limitMiddleware(req: Request, res: Response, next: NextFunction): void {
+  public limitMiddleware(
+    req: Request,
+    res: Response,
+    next: NextFunction,
+  ): void {
     try {
       if (this.count >= this.limit) {
         throw new Error();
@@ -31,4 +35,6 @@ class LimitMiddleware {
 }
 
 const limitMiddlewareInstance = new LimitMiddleware(4, 10);
-export default limitMiddlewareInstance.limitMiddleware.bind(limitMiddlewareInstance);
+export default limitMiddlewareInstance.limitMiddleware.bind(
+  limitMiddlewareInstance,
+);

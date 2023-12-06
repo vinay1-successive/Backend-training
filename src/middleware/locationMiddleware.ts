@@ -1,4 +1,5 @@
-const locationMiddleware = (req, res, next) => {
+import { Request, Response, NextFunction } from "express";
+const locationMiddleware = (req:Request, res:Response, next:NextFunction) => {
   try {
     if (req.ip !== "::1") {
       throw new Error();

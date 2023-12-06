@@ -1,17 +1,19 @@
 import schema from "../utils/Schemas.js";
-const dynamicValidation = (req, res, next) => {
+
+import { Request, Response, NextFunction } from "express";
+const dynamicValidation = (req:Request, res:Response, next:NextFunction) => {
   try {
     const url = req.url.split("/")[1];
     const user = req.body;
     const validateFun = schema[url];
     const { error, value } = validateFun.validate(user, { abortEarly: false });
     if (error) {
-      throw error;
+      throw error.details;
     }
-    req.user = value;
+    req.body.user = value;
     next();
   } catch (error) {
-    return res.status(422).send(error.details);
+    return res.status(422).send(error);
   }
 };
 

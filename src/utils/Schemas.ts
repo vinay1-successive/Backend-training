@@ -1,6 +1,8 @@
-import Joi from "joi";
-
-const schema = {
+import Joi, { ObjectSchema } from "joi";
+interface validateConfig {
+  [key: string]: ObjectSchema<any>;
+}
+const schema:validateConfig = {
   login: Joi.object({
     username: Joi.string().alphanum().min(3).max(30).required(),
     password: Joi.string()

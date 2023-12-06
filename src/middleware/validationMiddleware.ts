@@ -1,15 +1,15 @@
 import userSchema from "../utils/userSchema.js";
-
-const validate = (req, res, next) => {
+import { Request, Response, NextFunction } from "express";
+const validate = (req: Request, res: Response, next: NextFunction) => {
   try {
     const user = req.body;
     const { error, value } = userSchema.validate(user, { abortEarly: false });
     if (error) {
-      throw error;
+      throw error.details;
     }
     next();
   } catch (error) {
-    return res.status(422).json(error.details);
+    return res.status(422).json(error);
   }
 };
 

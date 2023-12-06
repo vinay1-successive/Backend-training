@@ -6,9 +6,10 @@ import createError from "http-errors";
 import morgan from "morgan";
 import dotenv from "dotenv";
 import router from "./routes.js";
+import configuration from "./config/config.js";
 const app = express();
 dotenv.config();
-const port = process.env.PORT;
+const port = configuration.port;
 
 app.use(express.json());
 app.use(morgan(":method :url :date[clf]"));

@@ -1,5 +1,5 @@
 import jwt from "jsonwebtoken";
-const secret = "Vinay@1234";
+import configuration from "../config/config.js";
 import { Request, Response, NextFunction } from "express";
 const authToken = (req: Request, res: Response, next: NextFunction) => {
   try {
@@ -8,7 +8,7 @@ const authToken = (req: Request, res: Response, next: NextFunction) => {
       throw new Error();
     }
     const token = req.headers["authorization"]?.split(" ")[1];
-    const user = jwt.verify(token ?? "", secret);
+    const user = jwt.verify(token ?? "", configuration.secret);
     req.body.user = user;
     next();
   } catch (error) {

@@ -1,5 +1,5 @@
 import jwt from "jsonwebtoken";
-const secret = "Vinay@1234";
+import configuration from "../config/config.js";
 
 import { Request, Response } from "express";
 const setUser = (req: Request, res: Response) => {
@@ -9,7 +9,7 @@ const setUser = (req: Request, res: Response) => {
     if (!Object.keys(user).length) {
       throw new Error();
     }
-    const token = jwt.sign(user, secret, { expiresIn: "1h" });
+    const token = jwt.sign(user, configuration.secret, { expiresIn: "1h" });
     res.json({ token });
   } catch (error) {
     return res.status(422).send("Unprocessable entry");

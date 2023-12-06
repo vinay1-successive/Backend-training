@@ -1,4 +1,3 @@
-const secret = "Vinay@1234";
 import { Request, Response } from "express";
 const login = (req: Request, res: Response) => {
   res.send(`${req.body.user.username} Logged In`);

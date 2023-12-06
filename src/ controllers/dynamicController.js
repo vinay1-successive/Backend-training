@@ -1,6 +1,3 @@
-import jwt from "jsonwebtoken";
-const secret = "Vinay@1234";
-
 const login = (req, res) => {
   res.send(`${req.user.username} Logged In`);
 };

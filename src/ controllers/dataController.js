@@ -7,6 +7,17 @@ const getData = (req, res) => {
   }
 };
 
+const getDataByParameter = (req, res) => {
+  try {
+    if (isNaN(req.params.id)) {
+      return res.status(401).json({ error: "Invalid Id" });
+    }
+    res.json(req.params);
+  } catch (error) {
+    return res.status(401).json({ error: "Data not received" });
+  }
+};
+
 const putData = (req, res) => {
   try {
     const newD = req.body;
@@ -16,4 +27,4 @@ const putData = (req, res) => {
     return res.status(401).send("Unauthorized");
   }
 };
-export { getData, putData };
+export { getData, putData, getDataByParameter };

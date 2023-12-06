@@ -1,7 +1,7 @@
 import express from "express";
 import cookieParser from "cookie-parser";
 import arr from "./utils/mockData.js";
-import { dataRouter, loginRouter, dynamicLoginRouter } from "./routes/index.js";
+import { dataRouter, loginRouter, dynamicLoginRouter,asyncDataRouter } from "./routes/index.js";
 import {
   errorHandler,
   headerMiddleware,
@@ -21,13 +21,22 @@ app.use(cookieParser());
 app.use("/user", dynamicLoginRouter);
 app.use("/login", loginRouter);
 app.use("/data", dataRouter);
+app.use("/asyncData",asyncDataRouter);
 
 app.get("/", (req, res) => {
-  res.send(arr);
+  try {
+    res.send(arr);
+  } catch (error) {
+    res.status(401).send("Unauthorized");
+  }
 });
 
 app.get("/setValue", (req, res) => {
-  res.cookie("name", "Vinay").send("Done");
+  try {
+    res.cookie("name", "Vinay").send("Done");
+  } catch (error) {
+    res.send(error);
+  }
 });
 
 app.get("/checkValue", (req, res) => {

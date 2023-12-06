@@ -1,22 +1,24 @@
 import express from "express";
 import cookieParser from "cookie-parser";
 import arr from "./utils/mockData.js";
-import { dataRouter } from "./routes/index.js";
-import { loginRouter } from "./routes/index.js";
-import errorHandler from "./middleware/errorMiddleware.js";
+import { dataRouter, loginRouter, dynamicLoginRouter } from "./routes/index.js";
+import {
+  errorHandler,
+  headerMiddleware,
+  limitMiddleWare,
+} from "./middleware/index.js";
 import createError from "http-errors";
-import headerMiddleware from "./middleware/headerMiddleware.js";
-import limitMiddleWare from "./middleware/limitMiddleWare.js";
 import morgan from "morgan";
-
+import configuration from "./config/config.js";
 const app = express();
-const port = process.env.PORT || 3000;
+
 app.use(express.json());
 app.use(morgan(":method :url :date[clf]"));
 app.use(headerMiddleware({ CustomKey1: "CustomValue1" }));
 app.use(limitMiddleWare);
 app.use(cookieParser());
 
+app.use("/user", dynamicLoginRouter);
 app.use("/login", loginRouter);
 app.use("/data", dataRouter);
 
@@ -43,9 +45,8 @@ app.get("/checkValue", (req, res) => {
 app.use((req, res, next) => {
   next(createError(404, "Not Found"));
 });
-
 app.use(errorHandler);
 
-app.listen(port, () => {
-  console.log(`Started at ${port}`);
+app.listen(configuration.port, () => {
+  console.log(`Started at ${configuration.port}`);
 });

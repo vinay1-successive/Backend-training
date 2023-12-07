@@ -18,5 +18,14 @@ class BaseRepository<T> {
   updateById = async (id: string, newData: object): Promise<void> => {
     await this.modal.findByIdAndUpdate(id, newData);
   };
+
+  getById = async (id: string): Promise<T[]> => {
+    const data = await this.modal.findById(id);
+    return data;
+  };
+
+  deleteById = async (id: string): Promise<void> => {
+    await this.modal.findByIdAndDelete(id);
+  };
 }
 export default BaseRepository;

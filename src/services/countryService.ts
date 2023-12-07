@@ -18,6 +18,14 @@ class CountryService {
   updateCountryById = async (id: string, newData: object): Promise<void> => {
     await this.CountryDataRepository.updateById(id, newData);
   };
+
+  getCountryById = async (id: string): Promise<ICountry[]> => {
+    return await this.CountryDataRepository.getById(id);
+  };
+
+  deleteCountryById = async (id: string): Promise<void> => {
+    await this.CountryDataRepository.deleteById(id);
+  };
 }
 
 export default CountryService;

@@ -21,6 +21,11 @@ class CountryRouter {
     );
     this.countryRouter.get("/cc", countryControllerInstance.getAllData);
     this.countryRouter.patch("/update", countryControllerInstance.updateById);
+    this.countryRouter.get("/getOne", countryControllerInstance.getById);
+    this.countryRouter.delete(
+      "/deleteOne",
+      countryControllerInstance.deleteById,
+    );
   }
 }
 

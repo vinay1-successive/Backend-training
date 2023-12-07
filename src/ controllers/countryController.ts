@@ -24,6 +24,18 @@ class CountryController {
     await this.countryService.updateCountryById(id, newData);
     res.json("Data is Updated");
   };
+
+  public getById = async (req: Request, res: Response): Promise<void> => {
+    const id: string = req.body.id;
+    const data = await this.countryService.getCountryById(id);
+    res.status(200).json(data);
+  };
+
+  public deleteById = async (req: Request, res: Response): Promise<void> => {
+    const id: string = req.body.id;
+    await this.countryService.deleteCountryById(id);
+    res.json("Data is deleted");
+  };
 }
 
 const countryControllerInstance = new CountryController();

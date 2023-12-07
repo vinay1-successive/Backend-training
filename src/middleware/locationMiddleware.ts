@@ -1,7 +1,11 @@
-import { Request, Response, NextFunction } from "express";
+import { type Request, type Response, type NextFunction } from "express";
 
 class LocationMiddleware {
-  public locationMiddleware(req: Request, res: Response, next: NextFunction): void {
+  public locationMiddleware(
+    req: Request,
+    res: Response,
+    next: NextFunction,
+  ): void {
     try {
       if (req.ip !== "::1") {
         throw new Error();
@@ -15,4 +19,6 @@ class LocationMiddleware {
 }
 
 const locationMiddlewareInstance = new LocationMiddleware();
-export default locationMiddlewareInstance.locationMiddleware.bind(locationMiddlewareInstance);
+export default locationMiddlewareInstance.locationMiddleware.bind(
+  locationMiddlewareInstance,
+);

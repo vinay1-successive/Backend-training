@@ -1,10 +1,10 @@
-import { Request, Response, NextFunction } from "express";
+import { type Request, type Response, type NextFunction } from "express";
 
 class ParameterMiddleware {
   public parameterMiddleware(
     req: Request,
     res: Response,
-    next: NextFunction
+    next: NextFunction,
   ): void {
     console.log(req.params);
 
@@ -14,5 +14,5 @@ class ParameterMiddleware {
 
 const parameterMiddlewareInstance = new ParameterMiddleware();
 export default parameterMiddlewareInstance.parameterMiddleware.bind(
-  parameterMiddlewareInstance
+  parameterMiddlewareInstance,
 );

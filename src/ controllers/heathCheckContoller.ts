@@ -1,4 +1,4 @@
-import { Request, Response } from "express";
+import { type Request, type Response } from "express";
 class HealthCheckController {
   public check(req: Request, res: Response): void {
     try {
@@ -10,4 +10,6 @@ class HealthCheckController {
 }
 
 const healthCheckControllerInstance = new HealthCheckController();
-export default healthCheckControllerInstance.check.bind(healthCheckControllerInstance);
+export default healthCheckControllerInstance.check.bind(
+  healthCheckControllerInstance,
+);

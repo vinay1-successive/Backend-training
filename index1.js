@@ -1,5 +1,5 @@
 import { argv } from "node:process";
-import { sum, sub, mul, div } from "../lib/math.js";
+import { sum, sub, mul, div } from "./lib/math.js";
 import fs from "fs";
 const AddData = (val1, val2) => {
   const data = [

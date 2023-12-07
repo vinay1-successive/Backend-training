@@ -1,5 +1,5 @@
 import { type NextFunction, type Request, type Response } from "express";
-import userSchema from "../utils/userSchema";
+import countryValidationSchmea from "../utils/countryValidationSchema.js";
 class ValidationError extends Error {
   details: any;
 
@@ -8,11 +8,13 @@ class ValidationError extends Error {
     this.details = details;
   }
 }
-class ValidationMiddleware {
+class CountryValidationSchmea {
   public validate(req: Request, res: Response, next: NextFunction): void {
     try {
       const user = req.body;
-      const { error } = userSchema.validate(user, { abortEarly: false });
+      const { error } = countryValidationSchmea.validate(user, {
+        abortEarly: false,
+      });
       if (error) {
         const customError = new ValidationError("Failed", error.details);
         res.status(422).json({ error: customError });
@@ -25,7 +27,7 @@ class ValidationMiddleware {
   }
 }
 
-const validationMiddlewareInstance = new ValidationMiddleware();
-export default validationMiddlewareInstance.validate.bind(
-  validationMiddlewareInstance,
+const countryValidationMiddlewareInstance = new CountryValidationSchmea();
+export default countryValidationMiddlewareInstance.validate.bind(
+  countryValidationMiddlewareInstance,
 );

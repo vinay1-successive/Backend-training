@@ -1,10 +1,11 @@
 import jwt from "jsonwebtoken";
-import { Request, Response } from "express";
+import { type Request, type Response } from "express";
 class AuthController {
-  private secret: string;
+  private readonly secret: string;
   constructor(secret: string) {
     this.secret = secret;
   }
+
   public setUser(req: Request, res: Response): void {
     try {
       const user = req.body;

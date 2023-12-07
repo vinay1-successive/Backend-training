@@ -1,6 +1,10 @@
-import express, { Router } from "express";
-import { check, dataControllerInstance} from "../ controllers/index.js";
-import {authToken,limitMiddleWare,queryMiddleware} from "../middleware/index.js";
+import express, { type Router } from "express";
+import { check, dataControllerInstance } from "../ controllers/index.js";
+import {
+  authToken,
+  limitMiddleWare,
+  queryMiddleware,
+} from "../middleware/index.js";
 class DataRouter {
   public dataRouter: Router;
   constructor() {
@@ -9,10 +13,23 @@ class DataRouter {
   }
 
   private setupRoutes(): void {
-    this.dataRouter.get("/getData", queryMiddleware, authToken, dataControllerInstance.getData);
-    this.dataRouter.get("/getData/:id", dataControllerInstance.getDataByParameter);
-    this.dataRouter.post("/putData", limitMiddleWare, authToken, dataControllerInstance.putData);
-    this.dataRouter.get("/health",check);
+    this.dataRouter.get(
+      "/getData",
+      queryMiddleware,
+      authToken,
+      dataControllerInstance.getData,
+    );
+    this.dataRouter.get(
+      "/getData/:id",
+      dataControllerInstance.getDataByParameter,
+    );
+    this.dataRouter.post(
+      "/putData",
+      limitMiddleWare,
+      authToken,
+      dataControllerInstance.putData,
+    );
+    this.dataRouter.get("/health", check);
   }
 }
 

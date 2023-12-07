@@ -1,7 +1,12 @@
-import { Request, Response, NextFunction } from "express";
+import { type Request, type Response, type NextFunction } from "express";
 
 class ErrorHandler {
-  public errorHandler(err: any, req: Request, res: Response, next: NextFunction): void {
+  public errorHandler(
+    err: any,
+    req: Request,
+    res: Response,
+    next: NextFunction,
+  ): void {
     if (!err) {
       res.status(503).send("Service Unavailable");
     }

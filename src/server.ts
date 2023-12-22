@@ -12,6 +12,7 @@ import config from "./config";
 import { errorHandler, headerMiddleware } from "./middleware/index.js";
 import router from "./routes.js";
 import DatabaseConnection from "./lib/database/connection.js";
+import cors from "cors";
 class Server {
   private readonly app: Application;
   private readonly dbConnection: DatabaseConnection;
@@ -22,7 +23,7 @@ class Server {
 
   public async setup(): Promise<void> {
     dotenv.config();
-
+    this.app.use(cors());
     this.app.use(express.json());
     this.app.use(morgan(":method :url :date[clf]"));
     this.app.use(headerMiddleware);
